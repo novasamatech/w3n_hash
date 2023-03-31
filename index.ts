@@ -1,36 +1,31 @@
 import { blake2AsU8a } from '@polkadot/util-crypto'
 import * as multibase from 'multibase'
+import * as https from 'https'
 
-const doc = `{
-  "polkadot:411f057b9107718c9624d6aa4a3f23c1/slip44:2086": [
-    {
-      "account": "4qBSZdEoUxPVnUqbX8fjXovgtQXcHK7ZvSf56527XcDZUukq",
-      "description": "Treasury proposals transfers"
-    },
-    {
-      "account": "4oHvgA54py7SWFPpBCoubAajYrxj6xyc8yzHiAVryeAq574G",
-      "description": "Regular transfers"
-    },
-    {
-      "account": "4taHgf8x9U5b8oJaiYoNEh61jaHpKs9caUdattxfBRkJMHvm"
-    }
-  ],
-  "eip:1/slip44:60": [
-    {
-      "account": "0x8f8221AFBB33998D8584A2B05749BA73C37A938A",
-      "description": "NFT sales"
-    },
-    {
-      "account": "0x6b175474e89094c44da98b954eedeac495271d0f"
-    }
-  ]
-}`
-
-async function main() {
-  const buffer = Buffer.from(doc)
+async function main(url: string) {
+  const response = await new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      const { statusCode } = res
+      if (statusCode !== 200) {
+        reject(new Error(`Request failed with status code ${statusCode}`))
+        return
+      }
+      let rawData = ''
+      res.on('data', (chunk) => {
+        rawData += chunk
+      })
+      res.on('end', () => {
+        resolve(rawData)
+      })
+    }).on('error', (e) => {
+      reject(new Error(`Request failed with error ${e.message}`))
+    })
+  })
+  console.log("Data to encode:\n", response)
+  const buffer = Buffer.from(response as string)
   const hash = blake2AsU8a(buffer)
   const encoded = multibase.encode('base64urlpad', hash)
   console.log(Buffer.from(encoded).toString('utf-8'))
 }
 
-main()
+main("https://raw.githubusercontent.com/nova-wallet/nova-utils/master/chains/types/altair.json")
