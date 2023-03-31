@@ -1,0 +1,16 @@
+{
+  "name": "web3n_hash",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@polkadot/util-crypto": "^11.1.2",
+    "multibase": "^4.0.6"
+  }
+}
