@@ -28,4 +28,4 @@ async function main(url: string) {
   console.log(Buffer.from(encoded).toString('utf-8'))
 }
 
-main("https://raw.githubusercontent.com/nova-wallet/nova-utils/master/chains/types/altair.json")
+main("https://url/to/yours/file")
