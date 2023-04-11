@@ -25,7 +25,7 @@ npm install
 ### Change url with file to encode:
 
 ```javascript
-main("https://raw.githubusercontent.com/nova-wallet/nova-utils/master/chains/types/altair.json")
+main("path/to/your/file")
 ```
 
 ### Run the app:
