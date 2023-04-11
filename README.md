@@ -22,7 +22,7 @@ cd web3n_hash
 npm install
 ```
 
-### Change url with file to encode:
+### Change path to file in [index.ts](./index.ts) with yours:
 
 ```javascript
 main("path/to/your/file")
