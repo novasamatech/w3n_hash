@@ -25,7 +25,7 @@ npm install
 ### Change path to file in [index.ts](./index.ts) with yours:
 
 ```javascript
-main("path/to/your/file")
+main("https://url/to/yours/file")
 ```
 
 ### Run the app:
