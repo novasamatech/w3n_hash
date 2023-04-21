@@ -12,7 +12,7 @@ Once you have installed Node.js, you can run the application using the following
 ### Clone the repository to your local machine:
 
 ```bash
-git clone git@github.com:stepanLav/web3n_hash.git
+git clone git@github.com:nova-wallet/w3n_hash.git
 cd web3n_hash
 ```
 
