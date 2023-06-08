@@ -1,6 +1,8 @@
 import { blake2AsU8a } from '@polkadot/util-crypto'
 import * as multibase from 'multibase'
 import * as https from 'https'
+import { canonicalize } from 'json-canonicalize';
+
 
 async function main(url: string) {
   const response = await new Promise((resolve, reject) => {
@@ -21,8 +23,13 @@ async function main(url: string) {
       reject(new Error(`Request failed with error ${e.message}`))
     })
   })
-  console.log("Data to encode:\n", response)
-  const buffer = Buffer.from(response as string)
+  const jsonInput = JSON.parse(response as string)
+
+  // canonicalisation of received data
+  const canonicalizeJson = canonicalize(jsonInput)
+  console.log("Data to encode:\n", canonicalizeJson)
+
+  const buffer = Buffer.from(canonicalizeJson as string)
   const hash = blake2AsU8a(buffer)
   const encoded = multibase.encode('base64urlpad', hash)
   console.log(Buffer.from(encoded).toString('utf-8'))
