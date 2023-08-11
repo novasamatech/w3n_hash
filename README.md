@@ -1,4 +1,4 @@
-# Blake2 Multibase Hasher
+# W3N hasher
 
 This project is a small Node.js application that calculates the Blake2 hash of a JSON document, and encodes the hash using the multibase format. The encoded hash is printed to the console in base64url format.
 
@@ -33,3 +33,8 @@ main("https://url/to/yours/file")
 ```bash
 npm start
 ```
+
+
+## License
+W3N hasher is available under the Apache 2.0 license. See the LICENSE file for more info.
+© Novasama Technologies GmbH 2023
